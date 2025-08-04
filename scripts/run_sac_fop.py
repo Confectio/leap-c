@@ -34,10 +34,10 @@ def run_sac_fop(
     cfg.controller_name = controller_name
 
     # ---- Section: cfg.trainer ----
-    cfg.trainer.seed = 0
-    cfg.trainer.train_steps = 1000000
+    cfg.trainer.seed = seed
+    cfg.trainer.train_steps = 100
     cfg.trainer.train_start = 0
-    cfg.trainer.val_interval = 10000
+    cfg.trainer.val_interval = 10
     cfg.trainer.val_num_rollouts = 20
     cfg.trainer.val_deterministic = True
     cfg.trainer.val_num_render_rollouts = 1
@@ -64,8 +64,8 @@ def run_sac_fop(
 
     # ---- Section: cfg.trainer.log ----
     cfg.trainer.log.verbose = verbose
-    cfg.trainer.log.interval = 1000
-    cfg.trainer.log.window = 10000
+    cfg.trainer.log.interval = 10
+    cfg.trainer.log.window = 100
     cfg.trainer.log.csv_logger = True
     cfg.trainer.log.tensorboard_logger = True
     cfg.trainer.log.wandb_logger = False

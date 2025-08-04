@@ -23,12 +23,12 @@ class CartPoleController(ParameterizedController):
     def __init__(
         self,
         params: CartPoleParams | None = None,
-        N_horizon: int = 5,
-        T_horizon: float = 0.25,
+        N_horizon: int = 20,
+        T_horizon: float = 1,
         Fmax: float = 80.0,
         discount_factor: float = 1.00,
         exact_hess_dyn: bool = True,
-        cost_type: Literal["EXTERNAL", "NONLINEAR_LS"] = "NONLINEAR_LS",
+        cost_type: Literal["EXTERNAL", "NONLINEAR_LS"] = "EXTERNAL",
         stagewise: bool = False,
         export_directory: Path | None = None,
     ):
