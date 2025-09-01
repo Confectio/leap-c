@@ -280,10 +280,27 @@ def export_parametric_ocp(
 
     ######## Solver configuration ########
     ocp.solver_options.integrator_type = "DISCRETE"
-    ocp.solver_options.nlp_solver_type = "SQP"
 
     ocp.solver_options.exact_hess_dyn = exact_hess_dyn
-    ocp.solver_options.qp_solver = "PARTIAL_CONDENSING_HPIPM"
     ocp.solver_options.qp_solver_ric_alg = 1
+    
+    # For globalization, using the following options:
+    ocp.solver_options.nlp_solver_type = 'SQP'
+    ocp.solver_options.qp_solver = 'FULL_CONDENSING_DAQP'
+    # ocp.solver_options.globalization = 'MERIT_BACKTRACKING'
+    ocp.solver_options.qp_solver_iter_max = 400
+    ocp.solver_options.nlp_solver_max_iter = 500
+    # ocp.solver_options.levenberg_marquardt = 1e-6
+    ocp.solver_options.print_level = 0
+    ocp.solver_options.regularize_method = "PROJECT"
+    # ocp.solver_options.with_anderson_acceleration = True
+    
+    opts = ocp.solver_options
+    opts.qp_solver_tol_comp = 1e-8
+    opts.qp_solver_tol_stat = 1e-8
+    opts.qp_solver_tol_eq = 1e-8
+    opts.qp_solver_tol_ineq = 1e-8
+    opts.qp_solver_mu0 = 1e6
+    opts.qp_solver_t0_init = 0
 
     return ocp
