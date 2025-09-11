@@ -35,13 +35,6 @@ source .venv/bin/activate
 
 The following steps assume that the virtual environment is activated.
 
-#### CasADi
-
-Install CasADi by running:
-```bash
-pip install casadi
-```
-
 #### acados
 
 Then change into the acados directory 
@@ -51,7 +44,7 @@ cd external/acados
 ```
 
 and build it as described in the [acados documentation](https://docs.acados.org/installation/index.html). When running the
-`cmake` command, make sure to include the options `-DACADOS_WITH_OPENMP=ON`, `-DACADOS_PYTHON=ON` and `-DACADOS_NUM_THREADS=1`.
+`cmake` command, make sure to include the options `-DACADOS_WITH_OPENMP=ON`, `-DACADOS_PYTHON=ON` and `-DACADOS_NUM_THREADS=1`. Afterwards, install the [python interface](https://docs.acados.org/python_interface/index.html) of acados.
 
 #### PyTorch
 
@@ -71,13 +64,14 @@ To install the package in the root directory of the repository, run:
 pip install -e .
 ```
 
-For development, you might want to install additional dependencies:
+You might want to install additional dependencies. 
+E.g., for development, you want to run:
 
 ```bash
 pip install -e .[dev]
 ```
 
-See the [pyproject.toml](https://github.com/leap-c/leap-c/blob/main/pyproject.toml) for more information on the installed packages.
+See the [pyproject.toml](https://github.com/leap-c/leap-c/blob/main/pyproject.toml) for more  information on the installed packages.
 
 ## Testing
 
@@ -90,7 +84,7 @@ pytest tests -vv -s
 ## Linting and Formatting
 
 Only relevant if you want to contribute to the repository.
-For keeping our code style and our diffs consistent we use the [Ruff](https://docs.astral.sh/ruff/) linter and formatter (so far we use the standard settings).
+For keeping our code style and our diffs consistent we use the [Ruff](https://docs.astral.sh/ruff/) linter and formatter.
 
 To make this as easy as possible we also provide a [pre-commit](https://pre-commit.com/) config for running the linter and formatter automatically at every commit. For enabling pre-commit follow these steps:
 
