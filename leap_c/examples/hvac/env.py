@@ -283,6 +283,8 @@ class StochasticThreeStateRcEnv(MatplotlibRenderEnv):
             "comfort_reward": comfort_reward,
             "energy_reward": energy_reward,
             "success": comfort_reward,
+            "violation_low": lb - state[0],
+            "violation_high": state[0] - ub,
         }
 
         return reward, reward_info
