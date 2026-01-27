@@ -130,19 +130,25 @@ if __name__ == "__main__":
     parser.add_argument("--reuse_code_dir", type=Path, default=None)
     parser.add_argument("--use-wandb", action="store_true")
     parser.add_argument("--wandb-entity", type=str, default=None)
-    parser.add_argument("--wandb-project", type=str, default="leap-c")
+    parser.add_argument("--wandb-project", type=str, default="diffnmpc")
+    parser.add_argument("-wt", "--wandbtags", action="append", type=str)
+    parser.add_argument("-wg", "--wandbgroup", type=str, default=None)
     args = parser.parse_args()
 
     cfg = create_cfg(args.env, args.controller, args.seed)
 
     if args.use_wandb:
-        config_dict = asdict(cfg)
+        import wandb
+
+        wandb.login()
+        config_dict = asdict(cfg)  # Does not convert wandb_init_kwargs
         cfg.trainer.log.wandb_logger = True
         cfg.trainer.log.wandb_init_kwargs = {
-            "entity": args.wandb_entity,
             "project": args.wandb_project,
-            "name": default_name(args.seed, tags=["sac_fop", args.env, args.controller]),
+            "name": default_name(args.seed, tags=[args.experiment.upper(), args.env]),
             "config": config_dict,
+            "tags": args.wandbtags,
+            "group": args.wandbgroup,
         }
 
     if args.output_path is None:
