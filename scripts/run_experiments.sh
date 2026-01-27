@@ -20,8 +20,8 @@ seeds=(
     24 
     7331
 )
-tag="wrong_sens"
-g_add="wrong"
+tag="proper_sens"
+g_add="proper"
 # Function to check if a screen session containing "experiment_" is still running
 is_screen_running() {
     screen -ls | grep -q "experiment_"

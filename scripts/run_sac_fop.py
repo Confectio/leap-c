@@ -176,8 +176,10 @@ if __name__ == "__main__":
     )
     parser.add_argument("--reuse_code_dir", type=Path, default=None)
     parser.add_argument("--use-wandb", action="store_true")
+    parser.add_argument("-wt", "--wandbtags", action="append", type=str)
+    parser.add_argument("-wg", "--wandbgroup", type=str, default=None)
     parser.add_argument("--wandb-entity", type=str, default=None)
-    parser.add_argument("--wandb-project", type=str, default="leap-c")
+    parser.add_argument("--wandb-project", type=str, default="diffnmpc")
     args = parser.parse_args()
 
     if args.ckpt_modus is not None:
@@ -199,6 +201,7 @@ if __name__ == "__main__":
             "entity": args.wandb_entity,
             "project": args.wandb_project,
             "name": default_name(args.seed, tags=tags),
+            "group": args.wandbgroup,
             "config": config_dict,
         }
 
