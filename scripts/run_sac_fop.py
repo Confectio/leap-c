@@ -47,12 +47,12 @@ def create_cfg(
 
     # ---- Section: cfg.trainer ----
     cfg.trainer.seed = seed
-    cfg.trainer.train_steps = 1_000_000 if env == "pointmass" else 200_000
+    cfg.trainer.train_steps = 1_000_000 if env == "pointmass" else 100_000
     cfg.trainer.train_start = 0
     cfg.trainer.val_freq = 10_000 if env != "hvac" else 50_000
-    cfg.trainer.val_num_rollouts = 20 if env != "hvac" else 100
+    cfg.trainer.val_num_rollouts = 20 if env != "hvac" else 50
     cfg.trainer.val_deterministic = True
-    cfg.trainer.val_num_render_rollouts = 0
+    cfg.trainer.val_num_render_rollouts = 1
     cfg.trainer.val_render_mode = "rgb_array"
     cfg.trainer.val_report_score = "cum"
     cfg.trainer.ckpt_modus = ckpt_modus
@@ -105,10 +105,10 @@ def create_cfg(
 
     cfg.trainer.actor.extractor_name = cfg.extractor
     cfg.trainer.actor.distribution_name = "squashed_gaussian"
-    cfg.trainer.actor.residual = True if env == "hvac" else False
+    cfg.trainer.actor.residual = True if env == "hvac" else False  # True
 
     # ---- Section: cfg.trainer.actor.mlp ----
-    cfg.trainer.actor.mlp.hidden_dims = (256, 256, 256)
+    cfg.trainer.actor.mlp.hidden_dims = (256, 256, 256)  # None
     cfg.trainer.actor.mlp.activation = "relu"
     cfg.trainer.actor.mlp.weight_init = "orthogonal"
 
